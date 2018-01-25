@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://v2.bootcss.com/examples/signin.html -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Sign in · Twitter Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{% static 'account/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'account/css/form-signin.css' %}" rel="stylesheet">
+    <link href="{% static 'account/css/bootstrap-responsive.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin" action="{% url 'account:login' %}" method="post">
+        <h2 class="form-signin-heading">欢迎登录</h2>
+        <input type="text" class="input-block-level" placeholder="用户名" name="username">
+        <input type="password" class="input-block-level" placeholder="密码" name="password">
+{#        <label class="checkbox">#}
+{#            <input type="checkbox" value="remember-me"> 记住密码#}
+{#        </label>#}
+        <span style="color:red">{{ error }}</span><br>
+        <button class="btn btn-large btn-primary" type="submit">登录</button>
+        <a href="{% url 'account:register' %}" class="btn btn-large btn-primary">注册</a>
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>
