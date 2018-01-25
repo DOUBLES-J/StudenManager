@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://v2.bootcss.com/examples/signin.html -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Sign in · Twitter Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script type="text/javascript" src="{% static 'account/js/jquery.min.js' %}"></script>
+
+    <!-- Le styles -->
+    <link href="{% static 'account/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'account/css/form-signin.css' %}" rel="stylesheet">
+    <link href="{% static 'account/css/bootstrap-responsive.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin" action="{% url 'account:register' %}" method="post"> {# action="{% url 'app01:register' %}" #}
+        <h2 class="form-signin-heading">欢迎注册</h2>
+        <input type="text" class="input-block-level" placeholder="用户名" name="username" id="inputName">
+        <span class="namecheck"></span>
+        <input type="text" class="input-block-level" placeholder="昵称" name="nicheng">
+{#        下拉框，选学生还是老师#}
+        <input type="text" class="input-block-level" placeholder="手机/电话" name="phone">
+        <input type="password" class="input-block-level" placeholder="密码" name="password">
+        <input type="password" class="input-block-level" placeholder="确认密码" name="re_password">
+        <span style="color:red">{{ error }}</span><br>
+{#        <a href="{% url 'account:register' %}"><button class="btn btn-large btn-primary" type="submit">注册</button></a>#}
+        <button class="btn btn-large btn-primary" type="submit">注册</button>
+    </form>
+
+</div> <!-- /container -->
+<script type="text/javascript">
+    {# dom 加载完毕则执行回调函数 #}
+    $(document).ready(function () {
+        $('#inputName').blur(function () {
+            var name = $(this).val();
+            $.get('{% url 'account:checkname' %}', {name:name}, function(callback){
+                if (callback == 'ok'){
+                    $('.namecheck').text('用户名可以注册').css('color', 'green')
+                }
+                else{
+                    $('.namecheck').text(callback).css('color', 'red')
+                }
+            }); {# p1：http请求地址，p2：get请求的查询参数是什么，p3：回调函数 #}
+        })
+    })
+</script>
+</body>
+</html>
